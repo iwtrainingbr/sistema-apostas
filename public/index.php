@@ -9,7 +9,7 @@ function main(): void
     include '../vendor/autoload.php'; //pra fazer o auto carregamento, e não precisarmos botar trocentos includes
     include '../config/database.php';
 
-    $url = $_SERVER['REQUEST_URI']; //captura a url que o usuário tá acessando
+    $url = explode('?', $_SERVER['REQUEST_URI'])[0]; //captura a url que o usuário tá acessando
 
     $routes = include '../config/routes.php'; //importa as rotas e coloca elas dentro da variavel $routes
 

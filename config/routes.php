@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\Api\CategoryApiController;
 use App\Controller\Api\VehicleApiController;
 use App\Controller\CustomerController;
 use App\Controller\VehicleController;
@@ -31,6 +32,7 @@ return [
     '/categorias/adicionar' => createRoute(CategoryController::class, 'addAction'),
     '/categorias/excluir' => createRoute(CategoryController::class, 'removeAction'),
     '/categorias/editar' => createRoute(CategoryController::class, 'editAction'),
+    '/api/categorias' => createRoute(CategoryApiController::class, 'getAction'),
 
     '/aposta/listar' => createRoute(BetController::class, 'listAction'),
     '/aposta/adicionar' => createRoute(BetController::class, 'addAction'),

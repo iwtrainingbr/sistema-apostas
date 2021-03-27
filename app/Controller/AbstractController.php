@@ -6,8 +6,10 @@ namespace App\Controller;
 
 abstract class AbstractController
 {
-    public function render(string $viewName): void
+    public function render(string $viewName, array $data = []): void
     {
+        extract($data);
+
         include "../views/{$viewName}.phtml";
     }
 
