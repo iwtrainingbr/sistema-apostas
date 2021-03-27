@@ -2,7 +2,7 @@
 
 const DB_USER = 'alessandro';
 const DB_PASS = 'livre';
-const DB_NAME = 'db_lamparina';
+const DB_NAME = 'db_iw_apostas';
 const DB_DRIVER = 'mysqli';
 
 //$conexao = mysqli_connect('localhost', DB_USER, DB_PASS, DB_NAME);

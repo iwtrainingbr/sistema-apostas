@@ -11,17 +11,25 @@ use Doctrine\ORM\Mapping\{
     GeneratedValue
 };
 
-#[Entity]
+/**
+ * @Entity()
+ */
 class Category
 {
-    #[Id]
-    #[GeneratedValue]
-    #[Column]
+    /**
+     * @Id()
+     * @GeneratedValue()
+     * @Column(type="integer")
+     */
     private int $id;
 
-    #[Column]
+    /**
+     * @Column(length=30)
+     */
     private string $name;
 
-    #[Column]
+    /**
+     * @Column()
+     */
     private string $description;
 }
