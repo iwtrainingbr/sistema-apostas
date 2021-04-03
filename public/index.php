@@ -4,6 +4,8 @@ ini_set('display_errors',1);
 
 include '../vendor/autoload.php';
 
+session_start();
+
 function main(): void
 {
     include '../vendor/autoload.php'; //pra fazer o auto carregamento, e não precisarmos botar trocentos includes

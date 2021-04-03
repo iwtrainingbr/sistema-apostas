@@ -1,5 +1,15 @@
 <div class="ml-5">
     <div class="btn-group">
+        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?=$user['name']?>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/meu-perfil">Meu Perfil</a>
+            <a class="dropdown-item" href="/sair">Sair</a>
+        </div>
+    </div>
+
+    <div class="btn-group">
         <a class="btn btn-danger" href="/dashboard" >
             Dashboard
         </a>
@@ -38,11 +48,6 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="/lance/listar">Listar</a>
             <a class="dropdown-item" href="/lance/adicionar">Adicionar</a>
-        </div>
-    </div>
-    <div class="btn-group form-inline my-2 my-lg-0">
-        <div class="text-white mr-5">
-            <a href="/sair" class="btn btn-danger">Sair</a>
         </div>
     </div>
 </div>

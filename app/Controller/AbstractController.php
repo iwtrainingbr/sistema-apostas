@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Security\AuthSecurity;
+
 abstract class AbstractController
 {
     public function render(string $viewName, array $data = []): void
@@ -15,7 +17,11 @@ abstract class AbstractController
 
     public static function navbar(): void
     {
-        include "../views/_partials/navbar.phtml";
+        if (AuthSecurity::userIsLogged()) {
+            $user = AuthSecurity::getUserLogged();
+
+            include "../views/_partials/navbar.phtml";
+        }
     }
 }
 

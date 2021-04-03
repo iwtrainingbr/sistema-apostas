@@ -5,14 +5,23 @@
         </div>
         <div class="col">
             <h3 class="text-center">Faça seu Login para apostar!!!</h3>
+
+            <?php
+
+            if (isset($_GET['error'])) {
+                echo "<div class='alert alert-danger'>{$_GET['error']}</div>";
+            }
+
+            ?>
+
             <form method="post" action="">
-                <label for="login">LOGIN:</label>
-                <input name="login" type="text" id="login" class="form-control" placeholder="Digite seu E-mail">
+                <label for="email">EMAIL:</label>
+                <input name="email" type="email" id="email" class="form-control" placeholder="Digite seu E-mail">
                 <br>
                 <label for="password">SENHA:</label>
                 <input name="password" type="password" id="password" class="form-control" placeholder="Digite sua Senha">
                 <br>
-                <button href="/dashboard" class="btn btn-danger btn-lg btn-block">Entrar</button>
+                <button class="btn btn-danger btn-lg btn-block">Entrar</button>
                 <br>
                 <a href="/usuario/adicionar" class="text-center">Esqueci minha senha</a>
             </form>

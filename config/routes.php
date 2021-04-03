@@ -9,6 +9,7 @@ use App\Controller\BetController;
 use App\Controller\UserController;
 use App\Controller\BidController;
 use App\Controller\AuthenticationController;
+use App\Controller\DashboardController;
 
 
 function createRoute(string $controllerName, string $actionName): array
@@ -21,6 +22,8 @@ function createRoute(string $controllerName, string $actionName): array
 
 return [
     '/' => createRoute(AuthenticationController::class, 'loginAction'),
+    '/dashboard' => createRoute(DashboardController::class, 'dashboardAction'),
+
     '/veiculos/listar' => createRoute(VehicleController::class, 'listAction'),
     '/veiculos/adicionar' => createRoute(VehicleController::class, 'addAction'),
     '/veiculos/excluir' => createRoute(VehicleController::class, 'removeAction'),

@@ -4,13 +4,22 @@
     <tr>
         <th>Nome</th>
         <th>Email</th>
-        <th>Senha</th>
         <th>Foto</th>
         <th>Cpf</th>
         <th>Ações</th>
     </tr>
     </thead>
     <tbody>
-
+    <?php
+        foreach ($users as $user) {
+            echo "<tr>
+                <td>{$user->getName()}</td>
+                <td>{$user->getEmail()}</td>
+                <td>{$user->getImage()}</td>
+                <td>{$user->getCpf()}</td>
+                <td>...</td>
+            </tr>";
+        }
+    ?>
     </tbody>
 </table>
