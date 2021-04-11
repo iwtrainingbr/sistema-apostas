@@ -13,6 +13,16 @@
         </div>
         <?php \App\Controller\AbstractController::navbar();?>
 
+        <?php
+            if (isset($_GET['error'])) {
+                echo "
+                    <div class='alert alert-danger'>
+                        {$_GET['error']}
+                    </div>
+                ";
+            }
+        ?>
+
         <div class="card card-body mt-5">
             <?php main(); ?>
         </div>

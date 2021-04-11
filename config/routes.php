@@ -1,6 +1,7 @@
 <?php
 
 use App\Controller\Api\CategoryApiController;
+use App\Controller\Api\UserApiController;
 use App\Controller\Api\VehicleApiController;
 use App\Controller\CustomerController;
 use App\Controller\VehicleController;
@@ -12,11 +13,12 @@ use App\Controller\AuthenticationController;
 use App\Controller\DashboardController;
 
 
-function createRoute(string $controllerName, string $actionName): array
+function createRoute(string $controllerName, ?string $actionName = null): array
 {
     return [
         'controller' => $controllerName,
         'action' => $actionName,
+        'api_rest' => $actionName === null,
     ];
 }
 
@@ -35,7 +37,6 @@ return [
     '/categorias/adicionar' => createRoute(CategoryController::class, 'addAction'),
     '/categorias/excluir' => createRoute(CategoryController::class, 'removeAction'),
     '/categorias/editar' => createRoute(CategoryController::class, 'editAction'),
-    '/api/categorias' => createRoute(CategoryApiController::class, 'getAction'),
 
     '/aposta/listar' => createRoute(BetController::class, 'listAction'),
     '/aposta/adicionar' => createRoute(BetController::class, 'addAction'),
@@ -54,4 +55,9 @@ return [
 
     '/login' => createRoute(AuthenticationController::class, 'loginAction'),
     '/sair' => createRoute(AuthenticationController::class, 'logoutAction'),
+
+
+    // API
+    '/api/categorias' => createRoute(CategoryApiController::class),
+    '/api/usuarios' => createRoute(UserApiController::class),
 ];

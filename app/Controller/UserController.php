@@ -25,10 +25,7 @@ class UserController extends AbstractController
 
     public function listAction(): void
     {
-        if (!AuthSecurity::userIsLogged()) {
-            header('location: /?error=Precisar estar logado');
-            return;
-        }
+        AuthSecurity::precisaSerAdmin();
 
         $this->render('user/list', [
             'users' => $this->repository->findAll(),

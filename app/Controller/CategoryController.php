@@ -6,8 +6,12 @@ namespace App\Controller;
 
 use App\Adapter\Connection;
 use App\Entity\Category;
+use App\Exception\NotExistsUserLoggedException;
+use App\Exception\UserNotIsAdminException;
+use App\Security\UserWithoutPermission;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ObjectRepository;
+use App\Security\AuthSecurity;
 
 class CategoryController extends AbstractController
 {
@@ -22,11 +26,21 @@ class CategoryController extends AbstractController
 
     public function listAction(): void
     {
-        $categories = $this->repository->findAll();
+        try {
+            AuthSecurity::checkIsAdmin();
 
-        $this->render('category/list', [
-            'categories' => $categories,
-        ]);
+            $categories = $this->repository->findAll();
+
+            $this->render('category/list', [
+                'categories' => $categories,
+            ]);
+        } catch (NotExistsUserLoggedException $exception) {
+            header('location: /login?error='.$exception->getMessage());
+            return;
+        } catch (UserNotIsAdminException $exception) {
+            header('location: /?error='.$exception->getMessage());
+            return;
+        }
     }
 
     public function addAction(): void

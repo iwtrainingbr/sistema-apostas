@@ -21,17 +21,17 @@ class Category
      * @GeneratedValue()
      * @Column(type="integer")
      */
-    public int $id;
+    private int $id;
 
     /**
      * @Column(length=30)
      */
-    public string $name;
+    private string $name;
 
     /**
      * @Column()
      */
-    public string $description;
+    private string $description;
 
     public function getId(): int
     {

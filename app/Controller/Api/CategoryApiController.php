@@ -22,10 +22,66 @@ class CategoryApiController
 
     public function getAction(): void
     {
-        header('Content-Type: application/json');
+        $data = [];
 
-        echo json_encode(
-            $this->repository->findAll()
+        foreach ($this->repository->findAll() as $category) {
+            $data[] = [
+                'id' => $category->getId(),
+                'name' => $category->getName(),
+                'description' => $category->getDescription(),
+            ];
+        }
+
+        echo json_encode($data);
+    }
+
+    public function postAction(): void
+    {
+        $request = json_decode(
+            file_get_contents('php://input'), true
         );
+
+        $category = new Category();
+        $category->setName($request['name']);
+        $category->setDescription($request['description']);
+
+        $this->entityManager->persist($category);
+        $this->entityManager->flush();
+
+        $request['id'] = $category->getId();
+
+        echo json_encode($request);
+    }
+
+    public function putAction(): void
+    {
+        $id = $_GET['id'];
+
+        $request = json_decode(
+            file_get_contents('php://input'), true
+        );
+
+        $category = $this->repository->find($id);
+        $category->setName($request['name']);
+        $category->setDescription($request['description']);
+
+        $this->entityManager->persist($category);
+        $this->entityManager->flush();
+
+        echo json_encode($request);
+    }
+
+    public function deleteAction(): void
+    {
+        $id = $_GET['id'];
+
+        $category = $this->repository->find($id);
+
+        $request = json_decode(
+            file_get_contents('php://input'), true
+        );
+
+        $this->entityManager->remove($category);
+        $this->entityManager->flush();
     }
 }
