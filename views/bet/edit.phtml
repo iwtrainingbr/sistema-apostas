@@ -1,1 +1,38 @@
 <h1>Editar Aposta</h1>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <label for="category">Categoria</label>
+    <select name="category" id="category" class="form-control" required>
+        <option value="<?=$bet->getCategory()->getId()?>">
+            <?=$bet->getCategory()->getName()?>
+        </option>
+        <?php
+        foreach($categories as $category) {
+            echo "<option value='{$category->getId()}'>{$category->getName()}</option>";
+        }
+        ?>
+    </select>
+    <br>
+
+    <label for="title">Título</label>
+    <input type="text" value="<?=$bet->getTitle()?>" name="title" id="title" placeholder="Nome da Aposta" class="form-control" required>
+    <br>
+    <label for="description">Descrição</label>
+    <textarea name="description" id="description" placeholder="Descrição" class="form-control" required><?=$bet->getDescription()?></textarea>
+    <br>
+    <label for="image">Imagem</label>
+    <input type="file" name="image" id="image" class="form-control" required>
+    <br>
+    <label for="value">Valor</label>
+    <input type="number" value="<?=$bet->getValue()?>" name="value" id="value" placeholder="Valor da Aposta" class="form-control" required>
+    <br>
+    <label for="fee">Comissão</label>
+    <input type="number" value="<?=$bet->getFee()?>" name="fee" id="fee" placeholder="Comissão da casa" class="form-control" required>
+    <br>
+    <label for="date">Data</label>
+    <input type="date" value="<?=$bet->getDate()->format('Y-m-d')?>" name="date" id="date" placeholder="Data do Resultado" class="form-control" required>
+    <br>
+
+    <button class="btn btn-danger">ENVIAR</button>
+</form>
+<hr>

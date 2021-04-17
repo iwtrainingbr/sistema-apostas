@@ -1,0 +1,46 @@
+<?php
+
+$tbody = '';
+
+$user = \App\Security\AuthSecurity::getUserLogged()['name'];
+
+foreach ($bets as $bet) {
+    $tbody .= "
+        <tr>
+            <td>{$bet->getTitle()}</td>
+            <td>{$bet->getCategory()->getName()}</td>
+            <td>{$bet->getDescription()}</td>
+            <td><img src='https://scontent-for1-1.cdninstagram.com/v/t51.2885-15/e35/118227747_812542819552994_4725576159990808171_n.jpg?tp=1&_nc_ht=scontent-for1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=tyRZVIWiQx4AX-NgK2i&edm=AP_V10EAAAAA&ccb=7-4&oh=22c1fa9f99d63064aeef588ea225f2c5&oe=609FCAD5&_nc_sid=4f375e' width='100px'></td>
+            <td>R$ {$bet->getValue()}</td>
+            <td>{$bet->getFee()}%</td>
+            <td>{$bet->getDate()->format('d/m/Y H:i:s')}</td>
+        </tr>
+    ";
+}
+
+return '
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <h1>Relatório de Apostas</h1>
+    
+    <div class="alert alert-info">
+        Relatório Gerado em '.date('d/m/Y H:i:s').' pelo usuário <em>'. $user .'</em>
+    </div>
+    
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Título</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Imagem</th>
+                <th>Valor</th>
+                <th>Comissão da Casa</th>
+                <th>Data do Resultado</th>
+            </tr>
+        </thead>
+        <tbody>'.$tbody.'</tbody>
+    </table>
+';
+
+?>

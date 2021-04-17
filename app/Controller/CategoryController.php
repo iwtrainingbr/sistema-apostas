@@ -9,6 +9,7 @@ use App\Entity\Category;
 use App\Exception\NotExistsUserLoggedException;
 use App\Exception\UserNotIsAdminException;
 use App\Security\UserWithoutPermission;
+use App\UploadFile\UploadFile;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ObjectRepository;
 use App\Security\AuthSecurity;
@@ -53,6 +54,9 @@ class CategoryController extends AbstractController
         $category = new Category();
         $category->setName($_POST['name']);
         $category->setDescription($_POST['description']);
+        $category->setImage(
+            UploadFile::uploadPhoto($_FILES['image'])
+        );
 
         // INSERT INTO Category (name, description) VALUES ('nome', 'descricao');
         $this->entityManager->persist($category);
@@ -74,6 +78,10 @@ class CategoryController extends AbstractController
 
         $this->entityManager->remove($category);
         $this->entityManager->flush();
+
+        if ($category->getImage()) {
+            UploadFile::removePhoto($category->getImage());
+        }
 
         header('location: /categorias/listar');
     }

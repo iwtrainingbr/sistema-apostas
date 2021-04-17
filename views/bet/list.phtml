@@ -1,9 +1,15 @@
 <h1>Lista de Apostas</h1>
 
+
+<div class="mt-2 mb-3">
+    <a href="/aposta/pdf" class="btn btn-outline-dark">Gerar PDF</a>
+</div>
+
 <table class="table table-striped table-hover">
     <thead class="thead-dark">
     <tr>
         <th>Título</th>
+        <th>Categoria</th>
         <th>Descrição</th>
         <th>Imagem</th>
         <th>Valor</th>
@@ -13,6 +19,31 @@
     </tr>
     </thead>
     <tbody>
-
+        <?php
+            /** @var \App\Entity\Bet $bet */
+            foreach ($bets as $bet) {
+                echo "<tr>
+                    <td>{$bet->getTitle()}</td>
+                    <td>{$bet->getCategory()->getName()}</td>
+                    <td>{$bet->getDescription()}</td>
+                    <td><img src='{$bet->getPhoto()}' width='100px'></td>
+                    <td>R$ {$bet->getValue()}</td>
+                    <td>{$bet->getFee()}%</td>
+                    <td>{$bet->getDate()->format('d/m/Y H:i:s')}</td>
+                    <td>
+                        <a href='/aposta/editar?id={$bet->getId()}' class='btn btn-warning'>Editar</a>
+                        <button onclick='confirmDelete({$bet->getId()})' class='btn btn-danger'>Excluir</button>
+                    </td>
+                </tr>";
+            }
+        ?>
     </tbody>
 </table>
+
+<script>
+    function confirmDelete(id) {
+        if (confirm('Você tem certeza que quer excluir essa aposta?')) {
+            location.href = "/aposta/excluir?id="+id;
+        }
+    }
+</script>

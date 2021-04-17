@@ -1,0 +1,30 @@
+<div class="row mt-5">
+    <div class="col-md-6">
+        <img src="<?=$user->getImage()?>" width="200px" alt="">
+    </div>
+    <div class="col-md-6">
+        <div class="card card-body">
+            <p>
+                <?php if ($user->isAdmin()) { ?>
+                    <span class="badge badge-dark">Administrador</span>
+                <?php } ?>
+            </p>
+            <p>
+                <strong>Nome: </strong> <?=$user->getName()?>
+            </p>
+            <p>
+                <strong>Email: </strong> <?=$user->getEmail()?>
+            </p>
+            <p>
+                <strong>CPF: </strong> <?=$user->getCpf()?>
+            </p>
+            <p>
+                <strong>Ultimo login: </strong>
+                <?php
+                    echo $user->getLastAccess()->format('d/m/Y H:i:s');
+                ?>
+
+            </p>
+        </div>
+    </div>
+</div>

@@ -45,6 +45,10 @@ class AuthenticationController extends AbstractController
             'id' => $user->getId(),
         ];
 
+        $user->setLastAccess(new \DateTime());
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
         header('location: /dashboard');
     }
 

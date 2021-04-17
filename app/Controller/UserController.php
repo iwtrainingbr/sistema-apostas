@@ -25,7 +25,7 @@ class UserController extends AbstractController
 
     public function listAction(): void
     {
-        AuthSecurity::precisaSerAdmin();
+        AuthSecurity::checkIsAdmin();
 
         $this->render('user/list', [
             'users' => $this->repository->findAll(),
@@ -68,5 +68,16 @@ class UserController extends AbstractController
 
     public function removeAction(): void
     {
+    }
+
+    public function profileAction(): void
+    {
+        $userLogged = AuthSecurity::getUserLogged();
+
+        $user = $this->repository->find($userLogged['id']);
+
+        $this->render('user/profile', [
+            'user' => $user,
+        ]);
     }
 }

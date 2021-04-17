@@ -33,6 +33,11 @@ class Category
      */
     private string $description;
 
+    /**
+     * @Column(nullable=true)
+     */
+    private ?string $image;
+
     public function getId(): int
     {
         return $this->id;
@@ -61,5 +66,15 @@ class Category
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): void
+    {
+        $this->image = $image;
     }
 }

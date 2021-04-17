@@ -12,6 +12,7 @@ class Connection
     public static function getEntityManager(): EntityManager
     {
         $params = [
+            'host' => 'localhost',
             'driver' => DB_DRIVER,
             'user' => DB_USER,
             'password' => DB_PASS,

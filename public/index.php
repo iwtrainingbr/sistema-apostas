@@ -47,4 +47,13 @@ if ($route['api_rest'] === true) {
     exit;
 }
 
+if ($route['pdf'] === true) {
+    $controller = $route['controller'];
+    $method = $route['action'];
+
+    (new $controller())->$method();
+
+    exit;
+}
+
 include '../views/base.phtml';

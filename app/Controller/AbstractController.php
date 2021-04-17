@@ -15,6 +15,13 @@ abstract class AbstractController
         include "../views/{$viewName}.phtml";
     }
 
+    public function renderToPdf(string $viewName, array $data = [])
+    {
+        extract($data);
+
+        return include "../views/{$viewName}.phtml";
+    }
+
     public static function navbar(): void
     {
         if (AuthSecurity::userIsLogged()) {

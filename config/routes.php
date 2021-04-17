@@ -19,6 +19,17 @@ function createRoute(string $controllerName, ?string $actionName = null): array
         'controller' => $controllerName,
         'action' => $actionName,
         'api_rest' => $actionName === null,
+        'pdf' => false,
+    ];
+}
+
+function createPDFRoute(string $controllerName, string $actionName): array
+{
+    return [
+        'controller' => $controllerName,
+        'action' => $actionName,
+        'api_rest' => false,
+        'pdf' => true,
     ];
 }
 
@@ -42,11 +53,13 @@ return [
     '/aposta/adicionar' => createRoute(BetController::class, 'addAction'),
     '/aposta/excluir' => createRoute(BetController::class, 'removeAction'),
     '/aposta/editar' => createRoute(BetController::class, 'editAction'),
+    '/aposta/pdf' => createPDFRoute(BetController::class, 'pdfAction'),
 
     '/usuario/listar' => createRoute(UserController::class, 'listAction'),
     '/usuario/adicionar' => createRoute(UserController::class, 'addAction'),
     '/usuario/excluir' => createRoute(UserController::class, 'removeAction'),
     '/usuario/editar' => createRoute(UserController::class, 'editAction'),
+    '/meu-perfil' => createRoute(UserController::class, 'profileAction'),
 
     '/lance/listar' => createRoute(BidController::class, 'listAction'),
     '/lance/adicionar' => createRoute(BidController::class, 'addAction'),
